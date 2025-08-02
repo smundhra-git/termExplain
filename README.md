@@ -33,6 +33,8 @@ python3 main.py
 python3 main.py --save "Permission denied"
 ```
 
+
+
 ### Shell Integration
 Add to your shell profile (`.bashrc`, `.zshrc`, etc.):
 ```bash
@@ -42,4 +44,6 @@ source /path/to/termExplain/explain.sh
 Then use anywhere:
 ```bash
 explain "command not found: docker"
+
+explain --file <test_file.py>
 ``` 
