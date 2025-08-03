@@ -18,7 +18,7 @@ def read_requirements():
 
 setup(
     name="termexplain",
-    version="1.0.0",
+    version="1.0.4",
     author="Shlok Mundhra",
     author_email="shlokmundhra1111@gmail.com",
     description="AI-powered CLI error explainer using Gemini",
