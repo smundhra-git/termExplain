@@ -15,10 +15,10 @@ from rich.text import Text
 from rich.syntax import Syntax
 from rich.prompt import Prompt
 
-from gemini_client import GeminiClient
-from prompt_builder import PromptBuilder
-from utils.formatter import OutputFormatter
-from utils.cache import ErrorCache
+from termexplain.gemini_client import GeminiClient
+from termexplain.prompt_builder import PromptBuilder
+from termexplain.utils.formatter import OutputFormatter
+from termexplain.utils.cache import ErrorCache
 
 console = Console()
 

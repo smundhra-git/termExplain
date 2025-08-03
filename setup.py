@@ -13,19 +13,21 @@ def read_readme():
 
 # Read requirements
 def read_requirements():
-    with open("requirements.txt", "r", encoding="utf-8") as fh:
+    here = os.path.abspath(os.path.dirname(__file__))
+    req_path = os.path.join(here, "requirements.txt")
+    with open(req_path, "r", encoding="utf-8") as fh:
         return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+
 
 setup(
     name="termexplain",
-    version="1.0.4",
+    version="1.0.1",
     author="Shlok Mundhra",
     author_email="shlokmundhra1111@gmail.com",
     description="AI-powered CLI error explainer using Gemini",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/smundhra-git/termExplain",
-    packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
@@ -43,6 +45,7 @@ setup(
     ],
     python_requires=">=3.8",
     install_requires=read_requirements(),
+    packages=find_packages(include=["termexplain", "termexplain.*"]),
     entry_points={
     "console_scripts": [
         "termexplain=termexplain.cli:main",
