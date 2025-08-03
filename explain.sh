@@ -1,35 +1,18 @@
 #!/bin/bash
-# termExplain Shell Alias Script
-# 
-# This script provides a convenient way to run termExplain from anywhere.
-# Add this to your shell profile (.bashrc, .zshrc, etc.) or run it directly.
+# termExplain Shell Wrapper
+# This script runs the Homebrew-installed version of termExplain from its virtualenv
 
-# Get the directory where this script is located
+# Get the path of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Function to run termExplain
-explain() {
-    # Check if Python is available
-    if ! command -v python3 &> /dev/null; then
-        echo "❌ Error: Python 3 is not installed or not in PATH"
-        return 1
-    fi
-    
-    # Check if the main.py file exists
-    if [ ! -f "$SCRIPT_DIR/main.py" ]; then
-        echo "❌ Error: termExplain not found at $SCRIPT_DIR/main.py"
-        return 1
-    fi
-    
-    # Run termExplain with all arguments
-    python3 "$SCRIPT_DIR/main.py" "$@"
-}
+# Path to Homebrew-installed termExplain's Python binary
+VENV_PY="$SCRIPT_DIR/../libexec/bin/python"
 
-# If this script is sourced, export the function
-if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
-    export -f explain
-    echo "✅ termExplain function exported. Use 'explain <error>' to explain errors."
-else
-    # If run directly, execute the function with arguments
-    explain "$@"
-fi 
+# Check if Python binary exists
+if [ ! -x "$VENV_PY" ]; then
+    echo "❌ Error: Python executable not found at $VENV_PY"
+    exit 1
+fi
+
+# Run the CLI using the installed package entry point
+exec "$VENV_PY" -m termexplain "$@"
