@@ -8,20 +8,32 @@ import os
 
 # Read the README file
 def read_readme():
-    with open("README.md", "r", encoding="utf-8") as fh:
-        return fh.read()
+    try:
+        with open("README.md", "r", encoding="utf-8") as fh:
+            return fh.read()
+    except FileNotFoundError:
+        return "AI-powered CLI error explainer using Gemini"
 
 # Read requirements
 def read_requirements():
     here = os.path.abspath(os.path.dirname(__file__))
     req_path = os.path.join(here, "requirements.txt")
-    with open(req_path, "r", encoding="utf-8") as fh:
-        return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
-
+    try:
+        with open(req_path, "r", encoding="utf-8") as fh:
+            return [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+    except FileNotFoundError:
+        return [
+            "google-generativeai>=0.3.0",
+            "click>=8.1.0",
+            "rich>=13.0.0",
+            "colorama>=0.4.6",
+            "python-dotenv>=1.0.0",
+            "requests>=2.31.0"
+        ]
 
 setup(
     name="termexplain",
-    version="1.0.1",
+    version="1.0.5",
     author="Shlok Mundhra",
     author_email="shlokmundhra1111@gmail.com",
     description="AI-powered CLI error explainer using Gemini",
@@ -47,9 +59,9 @@ setup(
     install_requires=read_requirements(),
     packages=find_packages(include=["termexplain", "termexplain.*"]),
     entry_points={
-    "console_scripts": [
-        "termexplain=termexplain.cli:main",
-        "explain=termexplain.cli:main",
+        "console_scripts": [
+            "termexplain=termexplain.cli:main",
+            "explain=termexplain.cli:main",
         ],
     },
     include_package_data=True,
