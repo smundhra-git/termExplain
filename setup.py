@@ -44,9 +44,9 @@ setup(
     python_requires=">=3.8",
     install_requires=read_requirements(),
     entry_points={
-        "console_scripts": [
-            "termexplain=main:main",
-            "explain=main:main",
+    "console_scripts": [
+        "termexplain=termexplain.cli:main",
+        "explain=termexplain.cli:main",
         ],
     },
     include_package_data=True,
